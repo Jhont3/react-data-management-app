@@ -22,6 +22,7 @@ module.exports = {
     '@typescript-eslint/space-before-function-paren': 'off',
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/no-confusing-void-expression': 'off',
-    'import/no-absolute-path': 'off'
+    'import/no-absolute-path': 'off',
+    '@typescript-eslint/method-signature-style': 'off'
   }
 }

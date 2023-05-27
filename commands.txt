@@ -1,5 +1,8 @@
 yarn install
 npx eslint --init
 
+CONFIG:
 <project: './tsconfig.json'> in .eslint.cjs
 add rules in .eslint.cjs
+https://quicktype.io/ types
+Definition toSorted method in types.d.ts

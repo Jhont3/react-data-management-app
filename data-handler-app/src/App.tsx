@@ -5,6 +5,16 @@ import { UserList } from './components/UserList'
 
 function App() {
   const [users, setUsers] = useState<User[]>([])
+  const [showColors, setShowColors] = useState(false)
+  const [sortByCountry, setSortByCountry] = useState(false)
+
+  const toggleColors = () => {
+    setShowColors(!showColors)
+  }
+
+  const toggleSortByCountry = () => {
+    setSortByCountry(prevState => !prevState)
+  }
 
   useEffect(() => {
     fetch('https://randomuser.me/api?results=100')
@@ -17,10 +27,33 @@ function App() {
       })
   }, [])
 
+  const sortedUsers = sortByCountry
+    ? users.toSorted((a, b) => {
+      return a.location.country.localeCompare(b.location.country)
+    })
+    : users
+
+  // Option:
+  // const sortedUsers = sortByCountry
+  //   ? [...users].sort((a, b) => {
+  //       return a.location.country.localeCompare(b.location.country)
+  //     })
+  //   : users
+
   return (
     <>
       <h1>Lista de usuarios</h1>
-      <UserList users={users}/>
+      <header>
+        <button onClick={toggleColors}>
+          Colorear filas
+        </button>
+        <button onClick={toggleSortByCountry}>
+          {sortByCountry ? 'No ordenar por país' : 'Ordernar por país'}
+        </button>
+      </header>
+      <main>
+        <UserList showColors={showColors} users={sortedUsers}/>
+      </main>
     </>
   )
 }

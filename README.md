@@ -7,8 +7,8 @@ Test solved previusly by Midudev on live coding stream https://www.twitch.tv/mid
 
 [x] Fetch 100 rows of data using the API.
 [x] Display the data in a table format.
-[] Provide the option to color rows. 
-[] Allow the data to be sorted by country as demonstrated in the example.
+[x] Provide the option to color rows. 
+[x] Allow the data to be sorted by country as demonstrated in the example.
 [] Enable the ability to delete a row.
 [] Implement a feature that allows the user to restore the initial state, meaning that all deleted rows will be recovered.
 [] Handle any potential errors that may occur.
