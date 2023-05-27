@@ -8,6 +8,7 @@ function App() {
   const [showColors, setShowColors] = useState(false)
   const [sortByCountry, setSortByCountry] = useState(false)
   const originalUsers = useRef<User[]>([])
+  const [filterCountry, setFilterCountry] = useState<string | null>(null)
 
   const toggleColors = () => {
     setShowColors(!showColors)
@@ -38,11 +39,17 @@ function App() {
       })
   }, [])
 
-  const sortedUsers = sortByCountry
-    ? users.toSorted((a, b) => {
-      return a.location.country.localeCompare(b.location.country)
+  const filteredUsers = typeof filterCountry === 'string' && filterCountry.length > 0
+    ? users.filter(user => {
+      return user.location.country.toLowerCase().includes(filterCountry.toLowerCase())
     })
     : users
+
+  const sortedUsers = sortByCountry
+    ? filteredUsers.toSorted((a, b) => {
+      return a.location.country.localeCompare(b.location.country)
+    })
+    : filteredUsers
 
   // Option:
   // const sortedUsers = sortByCountry
@@ -58,12 +65,19 @@ function App() {
         <button onClick={toggleColors}>
           Colorear filas
         </button>
+
         <button onClick={toggleSortByCountry}>
           {sortByCountry ? 'No ordenar por país' : 'Ordernar por país'}
         </button>
+
         <button onClick={handleReset}>
           Resetear lista de usuarios
         </button>
+
+        <input placeholder='Filtrar por pais' onChange={(e) => {
+          setFilterCountry(e.target.value)
+        }} type="text" />
+
       </header>
       <main>
         <UserList deleteUser={handleDelete} showColors={showColors} users={sortedUsers}/>
