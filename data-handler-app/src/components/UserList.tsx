@@ -3,9 +3,10 @@ import { type User } from '../types.d'
 interface Props {
   users: User[]
   showColors: boolean
+  deleteUser: (email: string) => void
 }
 
-export const UserList = ({ users, showColors }: Props) => {
+export const UserList = ({ users, showColors, deleteUser }: Props) => {
   return (
     <table width='100%'>
         <thead>
@@ -24,7 +25,7 @@ export const UserList = ({ users, showColors }: Props) => {
                   const bgColor = i % 2 === 0 ? '#eee' : '#ccc'
                   const onColor = showColors ? bgColor : 'transparent'
                   return (
-                    <tr key={i} style={{ backgroundColor: onColor }}>
+                    <tr key={user.email} style={{ backgroundColor: onColor }}>
                         <td>
                             <img src={user.picture.thumbnail} alt="user" />
                         </td>
@@ -32,7 +33,7 @@ export const UserList = ({ users, showColors }: Props) => {
                         <td>{user.name.last}</td>
                         <td>{user.location.country}</td>
                         <td>
-                            <button>Borrar</button>
+                            <button onClick={() => deleteUser(user.email)}>Borrar</button>
                         </td>
                     </tr>
                   )
