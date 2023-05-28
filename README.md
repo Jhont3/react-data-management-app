@@ -1,4 +1,4 @@
-![Home](eshop-fe/public/demo.png)
+![Home](data-handler-app/public/demo.png)
 # DATA MANAGEMENT APP
 
 Hello, this is my repo where I solve a mid level React technical test using ReactTS, and https://randomuser.me/ API.
