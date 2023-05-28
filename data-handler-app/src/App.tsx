@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useMemo } from 'react'
 import './App.css'
 import { type User } from './types.d'
 import { UserList } from './components/UserList'
@@ -39,24 +39,22 @@ function App() {
       })
   }, [])
 
-  const filteredUsers = typeof filterCountry === 'string' && filterCountry.length > 0
-    ? users.filter(user => {
-      return user.location.country.toLowerCase().includes(filterCountry.toLowerCase())
-    })
-    : users
+  const filteredUsers = useMemo(() => {
+    // console.log('filterUsers')
+    return typeof filterCountry === 'string' && filterCountry.length > 0
+      ? users.filter(user => {
+        return user.location.country.toLowerCase().includes(filterCountry.toLowerCase())
+      })
+      : users
+  }, [users, filterCountry])
 
-  const sortedUsers = sortByCountry
-    ? filteredUsers.toSorted((a, b) => {
-      return a.location.country.localeCompare(b.location.country)
-    })
-    : filteredUsers
-
-  // Option:
-  // const sortedUsers = sortByCountry
-  //   ? [...users].sort((a, b) => {
-  //       return a.location.country.localeCompare(b.location.country)
-  //     })
-  //   : users
+  // filter first, later sort
+  const sortedUsers = useMemo(() => {
+    // console.log('sortUsers')
+    return sortByCountry
+      ? filteredUsers.toSorted((a, b) => a.location.country.localeCompare(b.location.country))
+      : filteredUsers
+  }, [filteredUsers, sortByCountry])
 
   return (
     <>
@@ -87,3 +85,23 @@ function App() {
 }
 
 export default App
+
+// Options process:
+// const sortUsers = (users: User[]) => {
+//   // console.log('sortUsers')
+//   return sortByCountry
+//     ? users.toSorted((a, b) => a.location.country.localeCompare(b.location.country))
+//     : users
+// }
+
+// const sortedUsers = sortByCountry
+//   ? filteredUsers.toSorted((a, b) => {
+//     return a.location.country.localeCompare(b.location.country)
+//   })
+//   : filteredUsers
+
+// const sortedUsers = sortByCountry
+//   ? [...users].sort((a, b) => {
+//       return a.location.country.localeCompare(b.location.country)
+//     })
+//   : users
