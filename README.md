@@ -1,8 +1,8 @@
 ![Home](data-handler-app/public/demo.png)
 # DATA MANAGEMENT APP
 
-Hello, this is my repo where I solve a mid level React technical test using ReactTS, and https://randomuser.me/ API.
-Test solved previusly by Midudev on live coding stream https://www.twitch.tv/midudev/video/1792623213.
+Hi, this is my repo where I am solving a mid-level React technical test using ReactTS, and https://randomuser.me/ API. 
+Test previously solved by Midudev on live coding stream https://www.twitch.tv/midudev/video/1792623213.
 
 ## TEST REQUEST
 
